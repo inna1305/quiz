@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# webpack
+/dist
+/node_modules
+/build
+
+# scss
+.sass-cache
+
+# babel
+.eslintcache
+
+# editor
+.vscode
+.idea
+
+# logs
+log/
+*.log
+
+# various
+*.sqlite
+*.psd
+*.db
+*.sublime-project
+*.sublime-workspace
+*.pdf
+*.swp
+*.lock
+*.svg
