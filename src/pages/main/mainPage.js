@@ -21,12 +21,12 @@ const mainPage = () => {
 
     const questions = questionsData;
     const form = createElement('form');
-    //кнопки назад и вперед - слушатели - по событию изменения инпутов проверять, не пусто ли
-    //если нет, создавать объект, сохранить значения в лс, разблокировать кнопку - удалять текущий блок - рисовать новый
+    const fieldsets = [];
     for (let i = 0; i < questions.length; i++) {
         const fieldset = getFieldSet(questions[i], i + 1);
-        form.append(fieldset);
+        fieldsets.push(fieldset);
     }
+    form.append(fieldsets[0]);
 
     container.append(about, form);
     return container;
