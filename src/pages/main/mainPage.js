@@ -1,8 +1,13 @@
 import createElement from "../../helpers/createElement";
 import {questionsData} from "../../base/questions-data";
-import getFieldSet from "../../components/fieldset";
+import getQuestionElem from "../../components/getQuestionElem";
+import getButton from "../../components/getButton";
+import clearElement from "../../helpers/clearElement";
 
 const mainPage = () => {
+    if (!localStorage.getItem('step')) {
+        localStorage.setItem('step', '1');
+    }
     const container = createElement('div', { class: 'container' });
     const about = createElement('div', { class: 'about' });
     const title = createElement('h1', { class: 'about__title' }, 'Подберем ВУЗ мечты');
@@ -21,14 +26,29 @@ const mainPage = () => {
 
     const questions = questionsData;
     const form = createElement('form');
-    const fieldsets = [];
-    for (let i = 0; i < questions.length; i++) {
-        const fieldset = getFieldSet(questions[i], i + 1);
-        fieldsets.push(fieldset);
-    }
-    form.append(fieldsets[0]);
+    let currentStep = localStorage.getItem('step');
+    const questionElement = getQuestionElem(questions[currentStep-1]);
 
+    const buttonPrev = getButton('Назад');
+    buttonPrev.disabled = true;
+    const buttonNext = getButton('Далее', 'next');
+    buttonNext.disabled = true;
+    buttonNext.addEventListener('click', (event) => {
+        event.preventDefault();
+        doNextStep(questionElement);
+    });
+
+    form.append(questionElement, buttonPrev, buttonNext);
     container.append(about, form);
     return container;
+}
+
+//TODO вынести doNextStep отдельно?
+export const doNextStep = (questionElement) => {
+    const currentStep = Number(localStorage.getItem('step'));
+    const nextQuestion = getQuestionElem(questionsData[currentStep]);
+    clearElement(questionElement);
+    questionElement.append(nextQuestion);
+    localStorage.setItem('step', `${(currentStep + 1)}`);
 }
 export default mainPage;

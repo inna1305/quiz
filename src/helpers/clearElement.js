@@ -1,6 +1,6 @@
-const clearPage = (parentElement) => {
+const clearElement = (parentElement) => {
   while (parentElement.hasChildNodes()) {
     parentElement.removeChild(parentElement.firstChild);
   }
 };
-export default clearPage;
+export default clearElement;
