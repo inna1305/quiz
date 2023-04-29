@@ -15,8 +15,8 @@ const mainPage = () => {
         ' на 8 простых вопросов, и мы составим список наболее подходящих для вас вузов');
 
     const decorContainer = createElement('div', { class: 'about__decor' });
-    const decorWord1 = createElement('div', { class: 'about__decor_word1' }, 'Бесплатно');
-    const decorWord2 = createElement('div', { class: 'about__decor_word2' }, 'за 30 секунд');
+    const decorWord1 = createElement('div', { class: 'about__decor_word1 about__decor_word' }, 'Бесплатно');
+    const decorWord2 = createElement('div', { class: 'about__decor_word2 about__decor_word' }, 'за 30 секунд');
     const decorCircle = createElement('div', { class: 'about__decor_circle' });
     const decorLine = createElement('div', { class: 'about__decor_line' });
     const decorLight = createElement('div', { class: 'about__decor_light' });
