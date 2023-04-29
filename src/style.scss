@@ -1,1 +1,18 @@
 @import "base/normalize.css";
+@import "base/variables";
+@import "pages/main/mainPage";
+
+
+@font-face {
+  font-family: "OnestMedium";
+  src: url("fonts/OnestMedium500.ttf");
+}
+@font-face {
+  font-family: "OnestRegular";
+  src: url("fonts/OnestRegular400.ttf");
+}
+
+body {
+  background-color: $main-background-color;
+  font: $text-font;
+}
