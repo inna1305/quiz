@@ -15,4 +15,13 @@
 body {
   background-color: $main-background-color;
   font: $text-font;
+  color: $text-color;
+}
+
+h1 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
 }

@@ -1,0 +1,27 @@
+.container {
+  background-color: $question-frame-color;
+  border-radius: $border-radius-size;
+  max-width: $question-frame-width;
+  height: $question-frame-height;
+  -webkit-box-shadow: 0px 0px 23px 5px rgba(0,0,0,0.22);
+  -moz-box-shadow: 0px 0px 23px 5px rgba(0,0,0,0.22);
+  box-shadow: 0px 0px 23px 5px rgba(0,0,0,0.22);
+  padding: 32px;
+  margin: 40px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.about {
+
+  &__title {
+    font: $title-font;
+    margin-bottom: 16px;
+  }
+
+  &__description {
+    font: $text-font;
+  }
+}
+

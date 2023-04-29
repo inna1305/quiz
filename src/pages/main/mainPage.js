@@ -25,7 +25,7 @@ const mainPage = () => {
     about.append(title, description, decorContainer);
 
     const questions = questionsData;
-    const form = createElement('form');
+    const form = createElement('form', { class: 'form' });
     let currentStep = localStorage.getItem('step');
     const questionElement = getQuestionElem(questions[currentStep-1]);
 
