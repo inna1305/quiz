@@ -3,11 +3,13 @@ import {questionsData} from "../base/questions-data";
 import getRadioSet from "./getRadioSet";
 
 const getQuestionElem = (questionObj) => {
-    const container = createElement('div', { class: 'container-question' });
+    const container = createElement('div', { class: 'form__container' });
     const currentStep = Number(localStorage.getItem('step'));
-    const title = createElement('h2', { class: 'fieldset__title' }, questionObj.question);
-    const counter = createElement('span', { class: 'fieldset__counter' }, `Шаг ${currentStep}/${questionsData.length}`);
-    const inputSet = createElement( 'div', { class: 'fieldset__question'});
+    const titleCounterContainer = createElement('div', { class: 'form__title-counter-container' });
+    const title = createElement('h2', { class: 'form__title' }, questionObj.question);
+    const counter = createElement('div', { class: 'form__counter' }, `Шаг ${currentStep}/${questionsData.length}`);
+    titleCounterContainer.append(title, counter);
+    const inputSet = createElement( 'div', { class: 'form__question'});
     if (questionObj.answerType === 'radio') {
         inputSet.append(getRadioSet(questionObj));
     }
@@ -15,7 +17,7 @@ const getQuestionElem = (questionObj) => {
         console.log('select');
         //inputSet.append(getSelectSet(questionObj));
     }
-    container.append(title, counter, inputSet);
+    container.append(titleCounterContainer, inputSet);
     return container;
 }
 

@@ -1,8 +1,8 @@
 import createElement from "../../helpers/createElement";
 import {questionsData} from "../../base/questions-data";
 import getQuestionElem from "../../components/getQuestionElem";
-import getButton from "../../components/getButton";
 import clearElement from "../../helpers/clearElement";
+import getForm from "../../components/form/getForm";
 
 const mainPage = () => {
     if (!localStorage.getItem('step')) {
@@ -24,22 +24,7 @@ const mainPage = () => {
     decorContainer.append(decorWord1, decorWord2, decorCircle, decorLine, decorLight, decorBottom);
     about.append(title, description, decorContainer);
 
-    const questions = questionsData;
-    const form = createElement('form', { class: 'form' });
-    let currentStep = localStorage.getItem('step');
-    const questionElement = getQuestionElem(questions[currentStep-1]);
-
-    const buttonPrev = getButton('Назад');
-    buttonPrev.disabled = true;
-    const buttonNext = getButton('Далее', 'next');
-    buttonNext.disabled = true;
-    buttonNext.addEventListener('click', (event) => {
-        event.preventDefault();
-        doNextStep(questionElement);
-    });
-
-    form.append(questionElement, buttonPrev, buttonNext);
-    container.append(about, form);
+    container.append(about, getForm());
     return container;
 }
 
