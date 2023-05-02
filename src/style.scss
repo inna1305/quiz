@@ -1,1 +1,29 @@
+@import "base/normalize.css";
+@import "base/variables";
+@import "pages/main/mainPage";
+@import "components/form/form";
+@import "components/button/button";
 
+
+@font-face {
+  font-family: "OnestMedium";
+  src: url("fonts/OnestMedium500.ttf");
+}
+@font-face {
+  font-family: "OnestRegular";
+  src: url("fonts/OnestRegular400.ttf");
+}
+
+body {
+  background-color: $main-background-color;
+  font: $text-font;
+  color: $text-color;
+}
+
+h1, h2 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
