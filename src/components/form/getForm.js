@@ -1,8 +1,8 @@
 import createElement from "../../helpers/createElement";
 import getQuestionElem from "../getQuestionElem";
 import getButton from "../button/getButton";
-import {doNextStep} from "../../pages/main/mainPage";
 import {questionsData} from "../../base/questions-data";
+import clearElement from "../../helpers/clearElement";
 
 const getForm = () => {
     const questions = questionsData;
@@ -29,5 +29,13 @@ const getForm = () => {
 
     form.append(questionElement, buttons);
     return form;
+}
+
+export const doNextStep = (questionElement) => {
+    const currentStep = Number(localStorage.getItem('step'));
+    const nextQuestion = getQuestionElem(questionsData[currentStep]);
+    clearElement(questionElement);
+    questionElement.append(nextQuestion);
+    localStorage.setItem('step', `${(currentStep + 1)}`);
 }
 export default getForm;

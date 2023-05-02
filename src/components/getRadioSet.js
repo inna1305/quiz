@@ -1,9 +1,9 @@
 import createElement from "../helpers/createElement";
-import {setValueToLS} from "../helpers/setValueToLS";
-import {doNextStep} from "../pages/main/mainPage";
+import {doNextStep} from "./form/getForm";
+import {getMapFromLS} from "../helpers/getMapFromLS";
 
 const getRadioSet = (questionObj) => {
-    const fieldset = createElement('fieldset', { class: 'fieldset' });
+    const fieldset = createElement('fieldset', {class: 'fieldset'});
 
     questionObj.variants.forEach(elem => {
         const label = createElement('label', {class: 'fieldset__label', for: elem}, elem);
@@ -17,15 +17,19 @@ const getRadioSet = (questionObj) => {
         });
 
         input.addEventListener('click', () => {
-            //const buttonNext = document.getElementById('next');
-            const currentQuestion = document.querySelector('.container-question');
+            const buttonNext = document.getElementById('next');
+            const currentQuestion = document.querySelector('.form__container');
 
-            const data = {question: questionObj.question, value: input.value};
-            setValueToLS('responses', data);
-            //buttonNext.disabled = false;
+            const data = {question: questionObj.question, value: input.value, id: questionObj.id};
+
+            let mapFromLS = getMapFromLS('responses');
+            mapFromLS.set(questionObj.id, data);
+            localStorage.setItem('responses', JSON.stringify(Array.from(mapFromLS.entries())));
+
+            buttonNext.disabled = false;
             doNextStep(currentQuestion);
         });
-        const checkmark = createElement('span', { class: 'fieldset__checkmark' });
+        const checkmark = createElement('span', {class: 'fieldset__checkmark'});
         label.append(input, checkmark);
         fieldset.append(label);
     });
