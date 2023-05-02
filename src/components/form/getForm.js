@@ -1,6 +1,6 @@
 import createElement from "../../helpers/createElement";
 import getQuestionElem from "../getQuestionElem";
-import getButton from "../getButton";
+import getButton from "../button/getButton";
 import {doNextStep} from "../../pages/main/mainPage";
 import {questionsData} from "../../base/questions-data";
 
@@ -10,16 +10,24 @@ const getForm = () => {
     let currentStep = localStorage.getItem('step');
     const questionElement = getQuestionElem(questions[currentStep-1]);
 
-    const buttonPrev = getButton('Назад');
+    const buttonPrev = getButton('Назад', 'prev');
     buttonPrev.disabled = true;
     const buttonNext = getButton('Далее', 'next');
+    const arrowPrev = createElement('div', {}, '<');
+    const arrowNext = createElement('div', {}, '>');
+    buttonPrev.append(arrowPrev);
+    buttonNext.append(arrowNext);
     buttonNext.disabled = true;
     buttonNext.addEventListener('click', (event) => {
         event.preventDefault();
         doNextStep(questionElement);
     });
 
-    form.append(questionElement, buttonPrev, buttonNext);
+    const buttons = createElement('div', { class: 'buttons' });
+    buttons.append(buttonPrev, buttonNext);
+
+
+    form.append(questionElement, buttons);
     return form;
 }
 export default getForm;
