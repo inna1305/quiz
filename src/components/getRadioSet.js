@@ -9,6 +9,7 @@ const getRadioSet = (questionObj) => {
         const label = createElement('label', {class: 'fieldset__label', for: elem}, elem);
         const input = createElement('input', {
             class: 'fieldset__input',
+            id: elem,
             type: 'radio',
             value: elem,
             name: 'variant',
@@ -24,8 +25,9 @@ const getRadioSet = (questionObj) => {
             //buttonNext.disabled = false;
             doNextStep(currentQuestion);
         });
-
-        fieldset.append(label, input);
+        const checkmark = createElement('span', { class: 'fieldset__checkmark' });
+        label.append(input, checkmark);
+        fieldset.append(label);
     });
     return fieldset;
 };
