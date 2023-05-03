@@ -6,6 +6,11 @@
   justify-content: space-between;
   flex-direction: column;
 
+  &__question {
+    margin: 20px 0;
+    position: relative;
+  }
+
   &__title-counter-container {
     display: flex;
     justify-content: space-between;
@@ -92,13 +97,23 @@
 //select
 
 .select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   background-color: #f3f3f3;
   border: none;
-  padding: 10px;
+  border-radius: 15px;
   font-size: 16px;
+  position: relative;
+  width: 100%;
+
+  & option:checked {
+    background-color: white;
+    border-radius: 15px;
+    border: 1px solid $text-color;
+  }
+}
+
+.fieldset__option {
+  padding: 10px;
+  margin: 15px;
   position: relative;
 }
 
