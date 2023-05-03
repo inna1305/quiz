@@ -2,6 +2,9 @@
   background-color: white;
   border-radius: $border-radius-size;
   padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 
   &__title-counter-container {
     display: flex;
