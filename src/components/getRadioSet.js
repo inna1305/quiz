@@ -17,7 +17,6 @@ const getRadioSet = (questionObj) => {
         });
 
         input.addEventListener('click', () => {
-            const buttonNext = document.getElementById('next');
             const currentQuestion = document.querySelector('.form__container');
 
             const data = {question: questionObj.question, value: input.value, id: questionObj.id};
@@ -26,6 +25,7 @@ const getRadioSet = (questionObj) => {
             mapFromLS.set(questionObj.id, data);
             localStorage.setItem('responses', JSON.stringify(Array.from(mapFromLS.entries())));
 
+            const buttonNext = document.getElementById('next');
             buttonNext.disabled = false;
             doNextStep(currentQuestion);
         });

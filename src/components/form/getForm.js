@@ -36,5 +36,7 @@ export const doNextStep = (questionElement) => {
     const nextQuestion = getQuestionElem(questionsData[currentStep]);
     clearElement(questionElement);
     questionElement.append(nextQuestion);
+    const buttonNext = document.querySelector('#next');
+    buttonNext.disabled = true;
 }
 export default getForm;

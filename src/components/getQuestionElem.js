@@ -1,6 +1,7 @@
 import createElement from "../helpers/createElement";
 import {questionsData} from "../base/questions-data";
 import getRadioSet from "./getRadioSet";
+import getSelectSet from "./getSelectSet";
 
 const getQuestionElem = (questionObj) => {
     const container = createElement('div', { class: 'form__container' });
