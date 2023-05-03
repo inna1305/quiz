@@ -15,8 +15,7 @@ const getQuestionElem = (questionObj) => {
         inputSet.append(getRadioSet(questionObj));
     }
     if (questionObj.answerType === 'select') {
-        console.log('select');
-        //inputSet.append(getSelectSet(questionObj));
+        inputSet.append(getSelectSet(questionObj));
     }
     container.append(titleCounterContainer, inputSet);
     return container;
