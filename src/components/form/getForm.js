@@ -26,16 +26,15 @@ const getForm = () => {
     const buttons = createElement('div', { class: 'buttons' });
     buttons.append(buttonPrev, buttonNext);
 
-
     form.append(questionElement, buttons);
     return form;
 }
 
 export const doNextStep = (questionElement) => {
     const currentStep = Number(localStorage.getItem('step'));
+    localStorage.setItem('step', `${(currentStep + 1)}`);
     const nextQuestion = getQuestionElem(questionsData[currentStep]);
     clearElement(questionElement);
     questionElement.append(nextQuestion);
-    localStorage.setItem('step', `${(currentStep + 1)}`);
 }
 export default getForm;
