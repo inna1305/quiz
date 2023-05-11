@@ -17,7 +17,7 @@ const getRadioSet = (questionObj) => {
         });
 
         input.addEventListener('click', () => {
-            const currentQuestion = document.querySelector('.form__container');
+            const currentQuestion = document.querySelector('.form');
 
             const data = {question: questionObj.question, value: input.value, id: questionObj.id};
 

@@ -1,4 +1,3 @@
-import createElement from "../../helpers/createElement";
 
 // const getButton = (text, idWord, type) => {
 //     const button = createElement('button', { class: 'button', id: idWord }, text);
