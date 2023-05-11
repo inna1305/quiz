@@ -12,12 +12,7 @@ const renderForm = () => {
     return form;
 }
 
-// const renderNextQuestion = (currentStep) => {
-//     const prevQuestion = getQuestionElem(questionsData[currentStep]);
-//     clearElement(questionElement);
-//     questionElement.append(prevQuestion);
-// }
-
+//TODO answers
 
 // const getUserAnswers = () => {
 //     const answers = getMapFromLS('responses');

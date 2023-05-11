@@ -1,6 +1,6 @@
 import createElement from "../helpers/createElement";
 import {getMapFromLS} from "../helpers/getMapFromLS";
-import {doNextStep} from "./getQuestionElem";
+import {doNextStep} from "./form/functions/doStep";
 
 const getRadioSet = (questionObj) => {
     const fieldset = createElement('fieldset', {class: 'fieldset'});
@@ -20,7 +20,6 @@ const getRadioSet = (questionObj) => {
             const currentQuestion = document.querySelector('.form');
 
             const data = {question: questionObj.question, value: input.value, id: questionObj.id};
-
             let mapFromLS = getMapFromLS('responses');
             mapFromLS.set(questionObj.id, data);
             localStorage.setItem('responses', JSON.stringify(Array.from(mapFromLS.entries())));
