@@ -17,7 +17,6 @@ export const doNextStep = (questionElement) => {
     }
 }
 
-//TODO найти где записывается значение радио, записать селект
 
 export const doPrevStep = (questionElement) => {
     const currentStep = Number(localStorage.getItem('step'));

@@ -3,9 +3,16 @@ import {getMapFromLS} from "../helpers/getMapFromLS";
 import {doNextStep} from "./form/functions/doStep";
 
 const getRadioSet = (questionObj) => {
+    let checkedItem;
+    let mapFromLS = getMapFromLS('responses');
+    if (mapFromLS.get(questionObj.id)) {
+        checkedItem = mapFromLS.get(questionObj.id).value;
+    }
+
     const fieldset = createElement('fieldset', {class: 'fieldset'});
 
     questionObj.variants.forEach(elem => {
+
         const label = createElement('label', {class: 'fieldset__label', for: elem}, elem);
         const input = createElement('input', {
             class: 'fieldset__input',
@@ -15,6 +22,10 @@ const getRadioSet = (questionObj) => {
             name: 'variant',
             required: ''
         });
+        if (elem === checkedItem) {
+            input.checked = true;
+            //TODO разблокировать кнопку
+        }
 
         input.addEventListener('click', () => {
             const currentQuestion = document.querySelector('.form');
