@@ -3,6 +3,13 @@ import {getMapFromLS} from "../helpers/getMapFromLS";
 import {doNextStep} from "./form/functions/doStep";
 
 const getSelectSet = (questionObj) => {
+    let mapFromLS = getMapFromLS('responses');
+    let setOfSelected = new Set();
+
+    if (mapFromLS.get(questionObj.id)) {
+        setOfSelected = new Set(mapFromLS.get(questionObj.id).value);
+    }
+
     const select = createElement('select', {multiple: '', name: 'options', id: 'options', class: 'select'});
 
     questionObj.variants.forEach(elem => {
@@ -12,6 +19,10 @@ const getSelectSet = (questionObj) => {
             name: 'variant',
             required: ''
         }, elem);
+
+        if (setOfSelected && setOfSelected.has(elem)) {
+            option.selected = true;
+        }
 
         option.addEventListener('click', () => {
             const buttonNext = document.querySelector('#next');
@@ -44,22 +55,4 @@ export const handleSelectAnswers = (questionObj) => {
         buttonNext.disabled = true;
     }
 }
-
-// const handleSelect = (event) => {
-//     event.preventDefault();
-//
-//
-//     const data = { question: questionTitle.innerText, value: checkedInputs };
-//     setValueToLS('responses', data);
-//     //localStorage.setItem('step', `${currentStep + 1}`);
-// };
-
-// const handleNext2 = () => {
-//     const handleCurrentState = () => {
-//       //записать состояния,
-//     }
-//     const renderNextStep = () => {
-//         //обработка если радиобаттон или селект
-//     }
-// }
 export default getSelectSet;
