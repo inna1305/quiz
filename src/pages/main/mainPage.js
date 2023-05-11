@@ -1,5 +1,5 @@
 import createElement from "../../helpers/createElement";
-import getForm from "../../components/form/getForm";
+import renderForm from "../../components/form/renderForm";
 
 const mainPage = () => {
     if (!localStorage.getItem('step')) {
@@ -21,7 +21,7 @@ const mainPage = () => {
     decorContainer.append(decorWord1, decorWord2, decorCircle, decorLine, decorLight, decorBottom);
     about.append(title, description, decorContainer);
 
-    container.append(about, getForm());
+    container.append(about, renderForm());
     return container;
 }
 export default mainPage;

@@ -1,6 +1,6 @@
 import createElement from "../helpers/createElement";
-import {doNextStep} from "./form/getForm";
 import {getMapFromLS} from "../helpers/getMapFromLS";
+import {doNextStep} from "./getQuestionElem";
 
 const getRadioSet = (questionObj) => {
     const fieldset = createElement('fieldset', {class: 'fieldset'});
