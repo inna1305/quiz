@@ -2,6 +2,21 @@
   background-color: white;
   border-radius: $border-radius-size;
   padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  &__question {
+    margin: 20px 0;
+    position: relative;
+  }
 
   &__title-counter-container {
     display: flex;
@@ -21,13 +36,11 @@
 
 .fieldset {
   padding: 0;
-  margin: 24px 0 56px;
   border: none;
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   max-height: 184px;
-  justify-content: center;
 
   &__label {
     background-color: $input-background-color;
@@ -85,5 +98,28 @@
 .buttons {
   display: flex;
   justify-content: space-between;
+}
+
+//select
+
+.select {
+  background-color: #f3f3f3;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  position: relative;
+  width: 100%;
+
+  & option:checked {
+    background-color: white;
+    border-radius: 15px;
+    border: 1px solid $text-color;
+  }
+}
+
+.fieldset__option {
+  padding: 10px;
+  margin: 15px;
+  position: relative;
 }
 

@@ -1,8 +1,5 @@
 import createElement from "../../helpers/createElement";
-import {questionsData} from "../../base/questions-data";
-import getQuestionElem from "../../components/getQuestionElem";
-import clearElement from "../../helpers/clearElement";
-import getForm from "../../components/form/getForm";
+import renderForm from "../../components/form/renderForm";
 
 const mainPage = () => {
     if (!localStorage.getItem('step')) {
@@ -24,16 +21,7 @@ const mainPage = () => {
     decorContainer.append(decorWord1, decorWord2, decorCircle, decorLine, decorLight, decorBottom);
     about.append(title, description, decorContainer);
 
-    container.append(about, getForm());
+    container.append(about, renderForm());
     return container;
-}
-
-//TODO вынести doNextStep отдельно?
-export const doNextStep = (questionElement) => {
-    const currentStep = Number(localStorage.getItem('step'));
-    const nextQuestion = getQuestionElem(questionsData[currentStep]);
-    clearElement(questionElement);
-    questionElement.append(nextQuestion);
-    localStorage.setItem('step', `${(currentStep + 1)}`);
 }
 export default mainPage;
