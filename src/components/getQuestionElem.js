@@ -51,13 +51,7 @@ const renderNextButton = (step, questionObj) => {
     const button = createElement('button', { class: 'button', id: 'next' }, 'Вперёд');
     const arrowNext = createElement('div', {}, '>');
     button.append(arrowNext);
-    if (checkCurrentQuestion(questionObj.id)) {
-        button.disabled = false;
-    } else {
-        button.disabled = true;
-    }
-
-    //TODO если вопрос уже отвечен тогда кнопка активна (проверка здесь!)
+    button.disabled = !checkCurrentQuestion(questionObj.id);
 
     button.addEventListener('click', (event) => {
         event.preventDefault();
@@ -75,10 +69,7 @@ const renderNextButton = (step, questionObj) => {
 
 export const checkCurrentQuestion = (id) => {
     let mapFromLS = getMapFromLS('responses');
-    if (mapFromLS.get(id)) {
-        return true;
-    }
-    return false;
+    return !!mapFromLS.get(id);
 }
 
 export default getQuestionElem;

@@ -24,7 +24,6 @@ const getRadioSet = (questionObj) => {
         });
         if (elem === checkedItem) {
             input.checked = true;
-            //TODO разблокировать кнопку
         }
 
         input.addEventListener('click', () => {
