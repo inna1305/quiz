@@ -20,10 +20,6 @@ export const doNextStep = (questionElement) => {
         const nextQuestion = getQuestionElem(questionsData[currentStep]);
         clearElement(questionElement);
         questionElement.append(nextQuestion);
-    } else {
-        console.log(currentStep, stepsCount);
-        const buttonNext = document.querySelector('#next');
-        buttonNext.disabled = true;
     }
 }
 

@@ -1,6 +1,8 @@
 import createElement from "../helpers/createElement";
 import {questionsData} from "../base/questions-data";
 import {getMapFromLS} from "../helpers/getMapFromLS";
+import clearElement from "../helpers/clearElement";
+import getQuestionElem from "./getQuestionElem";
 
 const getContactForm = () => {
     const currentStep = Number(localStorage.getItem('step'));
@@ -14,30 +16,41 @@ const getContactForm = () => {
     titleCounterContainer.append(title, counter);
 
     const fieldset = createElement('fieldset', {class: 'fieldset'});
-    const placeholders = ['Как вас зовут?', 'Номер телефона', 'E-mail'];
-    placeholders.forEach(item => {
-        const input = createElement('input', {
-            type: 'text',
-            placeholder: item,
-            class: 'fieldset__input-text',
-            id: item,
-            required: '',
-        });
-        fieldset.append(input);
+
+    const name = createElement('input', {
+        type: 'text',
+        placeholder: 'Как вас зовут?',
+        class: 'fieldset__input-text',
+        id: 'name',
+        required: '',
     });
+
+    const number = createElement('input', {
+        type: 'text',
+        placeholder: 'Номер телефона',
+        class: 'fieldset__input-text',
+        id: 'number',
+        required: '',
+    });
+
+    const email = createElement('input', {
+        type: 'email',
+        placeholder: 'E-mail',
+        class: 'fieldset__input-text',
+        id: 'email',
+        required: '',})
+
+    fieldset.append(name, number, email);
 
     const button = createElement('button', {class: 'button', type: 'submit'}, 'Отправить');
     button.addEventListener('click', (event) => {
         event.preventDefault();
         const answers = getAnswersMap();
         recordAnswersToLS(answers);
-        const form = document.querySelector('form');
-        form.reset();
-        showMessage(answers.get(placeholders[0]), message);
+        showMessage(answers.get(name.placeholder), message, resetForm);
     });
 
     container.append(message, titleCounterContainer, fieldset, button);
-
     return container;
 }
 
@@ -65,7 +78,16 @@ const showMessage = (name, element) => {
     element.style.display = 'block';
     element.addEventListener('animationend', () => {
         element.style.display = 'none';
+        resetForm();
     });
+}
+
+const resetForm = () => {
+    localStorage.setItem('step', '1');
+    localStorage.setItem('responses', '[]');
+    const form = document.querySelector('form');
+    clearElement(form);
+    form.append(getQuestionElem(questionsData[0]));
 }
 
 
