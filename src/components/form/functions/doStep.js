@@ -1,17 +1,27 @@
 import {questionsData} from "../../../base/questions-data";
 import clearElement from "../../../helpers/clearElement";
 import getQuestionElem from "../../getQuestionElem";
+import getContactForm from "../../getContactForm";
 
 export const doNextStep = (questionElement) => {
     const currentStep = Number(localStorage.getItem('step'));
     const stepsCount = questionsData.length;
 
-    if (currentStep <= stepsCount) {
+    if (currentStep === stepsCount-1) {
+        localStorage.setItem('step', `${(currentStep + 1)}`);
+        const nextQuestion = getContactForm(questionsData[currentStep]);
+        const container = document.querySelector('.form');
+        clearElement(container);
+        container.append(nextQuestion);
+    }
+
+    if (currentStep < stepsCount-1) {
         localStorage.setItem('step', `${(currentStep + 1)}`);
         const nextQuestion = getQuestionElem(questionsData[currentStep]);
         clearElement(questionElement);
         questionElement.append(nextQuestion);
     } else {
+        console.log(currentStep, stepsCount);
         const buttonNext = document.querySelector('#next');
         buttonNext.disabled = true;
     }
@@ -30,3 +40,5 @@ export const doPrevStep = (questionElement) => {
         buttonPrev.disabled = true;
     }
 }
+
+

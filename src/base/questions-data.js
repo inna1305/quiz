@@ -47,4 +47,8 @@ export const questionsData = [
         variants: [ 'Как можно быстрее', 'Месяц', 'Квартал', 'Полгода', 'Год' ],
         id: 8,
     },
+    {
+        answerType: 'text',
+        id: 9,
+    },
 ];
