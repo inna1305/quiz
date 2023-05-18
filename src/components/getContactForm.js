@@ -28,6 +28,7 @@ const getContactForm = () => {
     const number = createElement('input', {
         type: 'text',
         placeholder: 'Номер телефона',
+        pattern: '/^\\+?\\d{0,20}(\\(\\d{1,20}\\))?$/',
         class: 'fieldset__input-text',
         id: 'number',
         required: '',
