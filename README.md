@@ -17,6 +17,9 @@ The project is built using the following technologies:
 - Native JavaScript: The core programming language used to implement the form's functionality.
 - Local Storage: A web browser API used to store and retrieve data locally on the user's device.
 
+## Deploy
+https://inna1305.github.io/quiz/
+
 ## Installation
 
 To run the project locally, follow these steps:
