@@ -11,6 +11,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    position: relative;
   }
 
   &__question {
@@ -67,6 +68,14 @@
     opacity: 0;
     pointer-events: none;
   }
+  &__input-text {
+    background-color: $input-background-color;
+    border-radius: 16px;
+    border: 1px solid $input-background-color;
+    padding: 18px;
+    min-width: 93%;
+    transition: all 0.1s ease;
+  }
 
   &__checkmark {
     position: relative;
@@ -75,7 +84,7 @@
     height: 20px;
     border: 1px solid $input-border-color;
     border-radius: 50%;
-    margin-right: 10px;
+    margin: 0 10px;
   }
 
   &__checkmark::before {
@@ -123,3 +132,26 @@
   position: relative;
 }
 
+.final-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  font-size: 17px;
+  font-weight: bolder;
+  padding: 50px;
+  border-radius: 10px;
+  z-index: 999;
+  animation: fadeout 1s 3s forwards;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
