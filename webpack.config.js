@@ -12,14 +12,6 @@ const baseConfig = {
     module: {
         rules: [
             {
-                test: /\.(?:ico|gif|png|jpg|jpeg|svg|ogg|mp3|wav)$/i,
-                type: 'asset/resource',
-            },
-            {
-                test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            },
-            {
                 test: /\.s[ac]ss$/i,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
@@ -33,6 +25,18 @@ const baseConfig = {
                     }
                 }
             },
+            {
+                test: /\.ttf$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }
+                ]
+            }
         ],
     },
     resolve: {
@@ -58,7 +62,7 @@ const baseConfig = {
         }),
         new CopyPlugin({
             patterns: [
-                {from: 'assets', to: path.resolve(__dirname, './dist/assets'), noErrorOnMissing: true},
+                {from: './src/assets', to: path.resolve(__dirname, './dist/assets'), noErrorOnMissing: false},
             ]
         }),
         new MiniCssExtractPlugin({filename: 'style.css'}),
