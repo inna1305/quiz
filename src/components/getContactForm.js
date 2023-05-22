@@ -28,7 +28,7 @@ const getContactForm = () => {
     const number = createElement('input', {
         type: 'text',
         placeholder: 'Номер телефона',
-        pattern: '/^\\+?\\d{0,20}(\\(\\d{1,20}\\))?$/',
+        pattern: '^\\+?\\d{0,20}(\\(\\d{1,20}\\))?$',
         class: 'fieldset__input-text',
         id: 'number',
         required: '',
@@ -39,20 +39,30 @@ const getContactForm = () => {
         placeholder: 'E-mail',
         class: 'fieldset__input-text',
         id: 'email',
-        required: '',})
+        required: '',
+    })
 
     fieldset.append(name, number, email);
 
     const button = createElement('button', {class: 'button', type: 'submit'}, 'Отправить');
     button.addEventListener('click', (event) => {
-        event.preventDefault();
-        const answers = getAnswersMap();
-        recordAnswersToLS(answers);
-        showMessage(answers.get(name.placeholder), message, resetForm);
-    });
+            const values = [name.value, number.value, email.value];
+            const allInputsFilled = values.every(value => value.length > 0);
+            if (allInputsFilled) {
+                handleSendButton(event, message);
+            }
+        }
+    );
 
     container.append(message, titleCounterContainer, fieldset, button);
     return container;
+}
+
+const handleSendButton = (event, message) => {
+    event.preventDefault();
+    const answers = getAnswersMap();
+    recordAnswersToLS(answers);
+    showMessage(answers.get(name.placeholder), message, resetForm);
 }
 
 const getAnswersMap = () => {
