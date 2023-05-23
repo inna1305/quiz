@@ -42,7 +42,7 @@ export const handleSelectAnswers = (questionObj) => {
         }
     });
     if (selected.length > 0) {
-        const data = {question: questionObj.question, value: selected, id: questionObj.id};
+        const data = {question: questionObj.name, value: selected, id: questionObj.id};
         let mapFromLS = getMapFromLS('responses');
         mapFromLS.set(questionObj.id, data);
         localStorage.setItem('responses', JSON.stringify(Array.from(mapFromLS.entries())));

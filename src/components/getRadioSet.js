@@ -29,7 +29,7 @@ const getRadioSet = (questionObj) => {
         input.addEventListener('click', () => {
             const currentQuestion = document.querySelector('.form');
 
-            const data = {question: questionObj.question, value: input.value, id: questionObj.id};
+            const data = {question: questionObj.name, value: input.value, id: questionObj.id};
             let mapFromLS = getMapFromLS('responses');
             mapFromLS.set(questionObj.id, data);
             localStorage.setItem('responses', JSON.stringify(Array.from(mapFromLS.entries())));
