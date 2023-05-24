@@ -8,16 +8,17 @@ const getContactForm = () => {
     const currentStep = Number(localStorage.getItem('step'));
 
     const container = createElement('div', {class: 'form__container'});
-    const message = createElement('p', {class: 'final-popup'});
+    const messageElem = createElement('p', {class: 'final-popup'});
 
     const titleCounterContainer = createElement('div', {class: 'form__title-counter-container'});
     const title = createElement('h2', {class: 'form__title'}, 'Ваша подборка готова! 🥳 Куда нам отправить её?');
-    const counter = createElement('div', {class: 'form__counter'}, `Шаг ${currentStep}/${questionsData.length}`);
+    const counter = createElement('div', {class: 'form__counter'}, `Шаг ${currentStep}/${questionsData.length+1}`);
     titleCounterContainer.append(title, counter);
 
     const fieldset = createElement('fieldset', {class: 'fieldset'});
 
     const name = createElement('input', {
+        name: 'userName',
         type: 'text',
         placeholder: 'Как вас зовут?',
         class: 'fieldset__input-text',
@@ -26,6 +27,7 @@ const getContactForm = () => {
     });
 
     const number = createElement('input', {
+        name: 'userNumber',
         type: 'text',
         placeholder: 'Номер телефона',
         pattern: '^\\+?\\d{0,20}(\\(\\d{1,20}\\))?$',
@@ -35,6 +37,7 @@ const getContactForm = () => {
     });
 
     const email = createElement('input', {
+        name: 'email',
         type: 'email',
         placeholder: 'E-mail',
         class: 'fieldset__input-text',
@@ -49,42 +52,93 @@ const getContactForm = () => {
             const values = [name.value, number.value, email.value];
             const allInputsFilled = values.every(value => value.length > 0);
             if (allInputsFilled) {
-                handleSendButton(event, message);
+                handleSendButton(event, messageElem, name.value);
             }
         }
     );
 
-    container.append(message, titleCounterContainer, fieldset, button);
+    container.append(messageElem, titleCounterContainer, fieldset, button);
     return container;
 }
 
-const handleSendButton = (event, message) => {
+const handleSendButton = (event, element, name) => {
     event.preventDefault();
-    const answers = getAnswersMap();
-    recordAnswersToLS(answers);
-    showMessage(answers.get(name.placeholder), message, resetForm);
+    recordAnswersToLS();
+    const requestBody = getRequestBody();
+
+    fetch('http://eco-silicon-387419.uc.r.appspot.com/surveys', {
+        method: 'POST',
+        body: requestBody
+    })
+        .then(response => {
+            // Обработка ответа от сервера
+            console.log(response);
+            console.log(requestBody);
+        })
+        .catch(error => {
+            console.log(error + 'it`s error!');
+            // Обработка ошибки
+        });
+
+    showMessage(element, name, resetForm);
 }
 
-const getAnswersMap = () => {
-    const answersMap = new Map();
-    const inputs = document.querySelectorAll('input');
-    inputs.forEach(item => {
-        if (item.value) {
-            answersMap.set(item.placeholder, item.value);
+const getRequestBody = () => {
+    const body = {
+        initiator: '',
+        cities: [],
+        currentEducation: '',
+        educationTargetType: '',
+        learningForm: '',
+        paidEducationAllowedType: '',
+        educationSpecialityType: [],
+        howManyToAdmission: '',
+        name: '',
+        phone: '',
+        email: ''
+    }
+
+    let mapFromLS = getMapFromLS('responses');
+    const answers = Array.from(mapFromLS.values());
+    answers.forEach(answer => {
+        if (Object.prototype.hasOwnProperty.call(body, answer.question)) {
+            body[answer.question] = answer.value;
         }
     });
-    return answersMap;
+    return body;
+}
+// {
+//   "initiator": "YOURSELF",
+//   "cities": [
+//     "string"
+//   ],
+//   "currentEducation": "GRADE_9",
+//   "educationTargetType": "GRADE_9",
+//   "learningForm": "FULL_TIME",
+//   "paidEducationAllowedType": "BUDGET_ONLY",
+//   "educationSpecialityType": [
+//     "ECONOMICS"
+//   ],
+//   "howManyToAdmission": "string"
+//   "name": "string",
+//   "phone": "string",
+//   "email": "string"
+// }
+
+const recordAnswersToLS = () => {
+    const inputs = document.querySelectorAll('input');
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].value) {
+            const data = {question: inputs[i].name, value: inputs[i].value, id: questionsData.length + i};
+            let mapFromLS = getMapFromLS('responses');
+            mapFromLS.set(questionsData.length+i, data);
+            localStorage.setItem('responses', JSON.stringify(Array.from(mapFromLS.entries())));
+        }
+    }
 }
 
-const recordAnswersToLS = (answers) => {
-    const mapAsString = JSON.stringify([...answers.entries()]);
-    const data = {question: 'user data', value: mapAsString, id: questionsData.length};
-    let mapFromLS = getMapFromLS('responses');
-    mapFromLS.set(questionsData.length, data);
-    localStorage.setItem('responses', JSON.stringify(Array.from(mapFromLS.entries())));
-}
 
-const showMessage = (name, element) => {
+const showMessage = (element, name) => {
     element.innerText = `${name}, спасибо! Скоро мы с Вами свяжемся!`;
     element.style.display = 'block';
     element.addEventListener('animationend', () => {

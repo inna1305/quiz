@@ -10,15 +10,16 @@ const getRadioSet = (questionObj) => {
     }
 
     const fieldset = createElement('fieldset', {class: 'fieldset'});
+    const variants = Array.from(questionObj.variants.keys());
 
-    questionObj.variants.forEach(elem => {
+    variants.forEach(elem => {
 
-        const label = createElement('label', {class: 'fieldset__label', for: elem}, elem);
+        const label = createElement('label', {class: 'fieldset__label', for: elem}, questionObj.variants.get(elem));
         const input = createElement('input', {
             class: 'fieldset__input',
             id: elem,
             type: 'radio',
-            value: elem,
+            value: questionObj.variants.get(elem),
             name: 'variant',
             required: ''
         });
@@ -29,7 +30,7 @@ const getRadioSet = (questionObj) => {
         input.addEventListener('click', () => {
             const currentQuestion = document.querySelector('.form');
 
-            const data = {question: questionObj.name, value: input.value, id: questionObj.id};
+            const data = {question: questionObj.name, value: input.id, id: questionObj.id};
             let mapFromLS = getMapFromLS('responses');
             mapFromLS.set(questionObj.id, data);
             localStorage.setItem('responses', JSON.stringify(Array.from(mapFromLS.entries())));

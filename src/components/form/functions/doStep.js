@@ -5,7 +5,7 @@ import getContactForm from "../../getContactForm";
 
 export const doNextStep = (questionElement) => {
     const currentStep = Number(localStorage.getItem('step'));
-    const stepsCount = questionsData.length;
+    const stepsCount = questionsData.length+1;
 
     if (currentStep === stepsCount-1) {
         localStorage.setItem('step', `${(currentStep + 1)}`);
