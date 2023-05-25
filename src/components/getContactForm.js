@@ -12,13 +12,13 @@ const getContactForm = () => {
 
     const titleCounterContainer = createElement('div', {class: 'form__title-counter-container'});
     const title = createElement('h2', {class: 'form__title'}, 'Ваша подборка готова! 🥳 Куда нам отправить её?');
-    const counter = createElement('div', {class: 'form__counter'}, `Шаг ${currentStep}/${questionsData.length+1}`);
+    const counter = createElement('div', {class: 'form__counter'}, `Шаг ${currentStep}/${questionsData.length + 1}`);
     titleCounterContainer.append(title, counter);
 
     const fieldset = createElement('fieldset', {class: 'fieldset'});
 
     const name = createElement('input', {
-        name: 'userName',
+        name: 'name',
         type: 'text',
         placeholder: 'Как вас зовут?',
         class: 'fieldset__input-text',
@@ -27,7 +27,7 @@ const getContactForm = () => {
     });
 
     const number = createElement('input', {
-        name: 'userNumber',
+        name: 'phone',
         type: 'text',
         placeholder: 'Номер телефона',
         pattern: '^\\+?\\d{0,20}(\\(\\d{1,20}\\))?$',
@@ -65,19 +65,20 @@ const handleSendButton = (event, element, name) => {
     event.preventDefault();
     recordAnswersToLS();
     const requestBody = getRequestBody();
+    const headers = new Headers();
+    headers.append('accept', '*/*');
+    headers.append('Content-Type', 'application/json');
 
     fetch('http://eco-silicon-387419.uc.r.appspot.com/surveys', {
         method: 'POST',
-        body: requestBody
+        body: JSON.stringify(requestBody),
+        headers: headers
     })
         .then(response => {
-            // Обработка ответа от сервера
-            console.log(response);
-            console.log(requestBody);
+
         })
         .catch(error => {
             console.log(error + 'it`s error!');
-            // Обработка ошибки
         });
 
     showMessage(element, name, resetForm);
@@ -85,21 +86,22 @@ const handleSendButton = (event, element, name) => {
 
 const getRequestBody = () => {
     const body = {
-        initiator: '',
-        cities: [],
-        currentEducation: '',
-        educationTargetType: '',
-        learningForm: '',
-        paidEducationAllowedType: '',
-        educationSpecialityType: [],
-        howManyToAdmission: '',
-        name: '',
-        phone: '',
-        email: ''
+        "initiator": "",
+        "cities": [],
+        "currentEducation": "",
+        "educationTargetType": "",
+        "learningForm": "",
+        "paidEducationAllowedType": "",
+        "educationSpecialityType": [],
+        "howManyToAdmission": "",
+        "name": "",
+        "phone": "",
+        "email": ""
     }
 
     let mapFromLS = getMapFromLS('responses');
     const answers = Array.from(mapFromLS.values());
+    console.log(answers);
     answers.forEach(answer => {
         if (Object.prototype.hasOwnProperty.call(body, answer.question)) {
             body[answer.question] = answer.value;
@@ -107,23 +109,6 @@ const getRequestBody = () => {
     });
     return body;
 }
-// {
-//   "initiator": "YOURSELF",
-//   "cities": [
-//     "string"
-//   ],
-//   "currentEducation": "GRADE_9",
-//   "educationTargetType": "GRADE_9",
-//   "learningForm": "FULL_TIME",
-//   "paidEducationAllowedType": "BUDGET_ONLY",
-//   "educationSpecialityType": [
-//     "ECONOMICS"
-//   ],
-//   "howManyToAdmission": "string"
-//   "name": "string",
-//   "phone": "string",
-//   "email": "string"
-// }
 
 const recordAnswersToLS = () => {
     const inputs = document.querySelectorAll('input');
@@ -131,7 +116,7 @@ const recordAnswersToLS = () => {
         if (inputs[i].value) {
             const data = {question: inputs[i].name, value: inputs[i].value, id: questionsData.length + i};
             let mapFromLS = getMapFromLS('responses');
-            mapFromLS.set(questionsData.length+i, data);
+            mapFromLS.set(questionsData.length + i + 1, data);
             localStorage.setItem('responses', JSON.stringify(Array.from(mapFromLS.entries())));
         }
     }

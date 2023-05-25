@@ -9,7 +9,8 @@ export const doNextStep = (questionElement) => {
 
     if (currentStep === stepsCount-1) {
         localStorage.setItem('step', `${(currentStep + 1)}`);
-        const nextQuestion = getContactForm(questionsData[currentStep]);
+        console.log(currentStep);
+        const nextQuestion = getContactForm();
         const container = document.querySelector('.form');
         clearElement(container);
         container.append(nextQuestion);

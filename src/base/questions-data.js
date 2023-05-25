@@ -1,5 +1,5 @@
 const initiatorMap = new Map([['YOURSELF', 'Себе'], ['SPOUSE', 'Супругу/супруге'], ['RELATIVE', 'Родственнику'], ['COLLEAGUE', 'Коллеге'], ['CHILD', 'Ребенку'], ['OTHER', 'Другое']]);
-const citiesMap = new Map([['SAINT_PETERSBURG', 'Санкт-Петербург'], ['MOSCOW', 'Москва'], ['NIJNIY_NOVGOROD', 'Нижний Новгород'], ['ROSTOV_ON_DON', 'Ростов-на-Дону']]);
+const citiesMap = new Map([['Санкт-Петербург', 'Санкт-Петербург'], ['Москва', 'Москва'], ['Нижний Новгород', 'Нижний Новгород'], ['Ростов-на-Дону', 'Ростов-на-Дону']]);
 const currentEducationMap = new Map([['GRADE_9', '9 классов'], ['GRADE_11', '11 классов'], ['TECHNICAL_SCHOOL', 'Училище'], ['TECHNICAL_COLLEGE', 'Колледж/техникум'], ['UNCOMPLETED_UNIVERSITY', 'Неоконченное высшее'], ['UNIVERSITY', 'Высшее']]);
 const educationTargetTypeMap = new Map([['UNIVERSITY', 'Вуз'], ['TECHNICAL_COLLEGE', 'Колледж/техникум'], ['TECHNICAL_SCHOOL', 'Училище']]);
 const learningFormMap = new Map([['FULL_TIME', 'Очную'], ['EXTRAMURAL', 'Заочную'], ['DISTANCE', 'Дистанционную']]);
