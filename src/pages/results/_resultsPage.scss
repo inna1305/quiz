@@ -18,13 +18,13 @@
 
 .institute {
   margin: 9px 0;
-  background-color: #CAFFA0;
+  background-color: #eaeaea;
   padding: 20px;
   border-radius: $border-radius-size;
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: #eaeaea;
+    background-color: #CAFFA0;
   }
 
   &-title {
@@ -35,5 +35,10 @@
 
 .results-button {
   margin: 8px 0;
+}
+
+.results-button_link {
+  text-decoration: none;
+  color: inherit;
 }
 
