@@ -13,7 +13,11 @@ const getResultElement = (data) => {
         specialityContainer.append(elem);
     });
 
-    const button = createElement('button', {class: 'button results-button'}, "Подробнее...");
+    const button = createElement('button', {class: 'button results-button'});
+    const site = createElement('a', {class: 'results-button_link'}, "Подробнее...");
+    const link = data.site;
+    link ? site.href = link : site.href = '#';
+    button.append(site);
     container.append(title, type, city, specialityContainer, button);
     return container;
 
