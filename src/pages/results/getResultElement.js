@@ -1,7 +1,7 @@
 import createElement from "../../helpers/createElement";
 
 const getResultElement = (data) => {
-    const container = createElement('div', {class: 'container'});
+    const container = createElement('div', {class: 'institute'});
     const title = createElement('h2', {class: 'institute-title'}, data.title);
 
     const type = createElement('p', {}, data.institutionType);
@@ -13,7 +13,7 @@ const getResultElement = (data) => {
         specialityContainer.append(elem);
     });
 
-    const button = createElement('button', {class: 'button'}, "Подробнее...");
+    const button = createElement('button', {class: 'button results-button'}, "Подробнее...");
     container.append(title, type, city, specialityContainer, button);
     return container;
 

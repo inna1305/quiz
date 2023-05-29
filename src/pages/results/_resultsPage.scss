@@ -1,0 +1,39 @@
+.container-results {
+  -webkit-box-shadow: 0px 0px 23px 5px rgba(0,0,0,0.22);
+  -moz-box-shadow: 0px 0px 23px 5px rgba(0,0,0,0.22);
+  box-shadow: 0px 0px 23px 5px rgba(0,0,0,0.22);
+  background-color: white;
+  max-width: $question-frame-width;
+  margin: 10px auto 0;
+  padding: 32px;
+  border-radius: $border-radius-size;
+
+}
+
+.institutes {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.institute {
+  margin: 9px 0;
+  background-color: #CAFFA0;
+  padding: 20px;
+  border-radius: $border-radius-size;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #eaeaea;
+  }
+
+  &-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+}
+
+.results-button {
+  margin: 8px 0;
+}
+

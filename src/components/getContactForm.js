@@ -9,7 +9,6 @@ const getContactForm = () => {
     const currentStep = Number(localStorage.getItem('step'));
 
     const container = createElement('div', {class: 'form__container'});
-    const messageElem = createElement('p', {class: 'final-popup'});
 
     const titleCounterContainer = createElement('div', {class: 'form__title-counter-container'});
     const title = createElement('h2', {class: 'form__title'}, 'Ваша подборка готова! 🥳 Куда нам отправить её?');
@@ -53,16 +52,16 @@ const getContactForm = () => {
             const values = [name.value, number.value, email.value];
             const allInputsFilled = values.every(value => value.length > 0);
             if (allInputsFilled) {
-                handleSendButton(event, messageElem, name.value);
+                handleSendButton(event, name.value);
             }
         }
     );
 
-    container.append(messageElem, titleCounterContainer, fieldset, button);
+    container.append(titleCounterContainer, fieldset, button);
     return container;
 }
 
-const handleSendButton = (event, element, name) => {
+const handleSendButton = (event) => {
     event.preventDefault();
     recordAnswersToLS();
     const requestBody = getRequestBody();
@@ -78,15 +77,14 @@ const handleSendButton = (event, element, name) => {
         .then(response => {
             return response.json();
         }).then(data => {
-            const body = document.querySelector('body');
-            clearElement(body);
-            body.append(resultsPage(data));
+        const body = document.querySelector('body');
+        clearElement(body);
+        body.append(resultsPage(data));
+        resetForm();
     })
         .catch(error => {
             console.log(error + 'it`s error!');
         });
-
-    showMessage(element, name, resetForm);
 }
 
 const getRequestBody = () => {
@@ -126,15 +124,6 @@ const recordAnswersToLS = () => {
     }
 }
 
-
-const showMessage = (element, name) => {
-    element.innerText = `${name}, спасибо! Скоро мы с Вами свяжемся!`;
-    element.style.display = 'block';
-    element.addEventListener('animationend', () => {
-        element.style.display = 'none';
-        resetForm();
-    });
-}
 
 const resetForm = () => {
     localStorage.setItem('step', '1');
