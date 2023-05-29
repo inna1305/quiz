@@ -3,6 +3,7 @@ import {questionsData} from "../base/questions-data";
 import {getMapFromLS} from "../helpers/getMapFromLS";
 import clearElement from "../helpers/clearElement";
 import getQuestionElem from "./getQuestionElem";
+import resultsPage from "../pages/results/resultsPage";
 
 const getContactForm = () => {
     const currentStep = Number(localStorage.getItem('step'));
@@ -75,8 +76,12 @@ const handleSendButton = (event, element, name) => {
         headers: headers
     })
         .then(response => {
-
-        })
+            return response.json();
+        }).then(data => {
+            const body = document.querySelector('body');
+            clearElement(body);
+            body.append(resultsPage(data));
+    })
         .catch(error => {
             console.log(error + 'it`s error!');
         });
@@ -101,7 +106,6 @@ const getRequestBody = () => {
 
     let mapFromLS = getMapFromLS('responses');
     const answers = Array.from(mapFromLS.values());
-    console.log(answers);
     answers.forEach(answer => {
         if (Object.prototype.hasOwnProperty.call(body, answer.question)) {
             body[answer.question] = answer.value;
