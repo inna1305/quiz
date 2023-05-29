@@ -3,7 +3,7 @@ import {questionsData} from "../base/questions-data";
 import {getMapFromLS} from "../helpers/getMapFromLS";
 import clearElement from "../helpers/clearElement";
 import getQuestionElem from "./getQuestionElem";
-import resultsPage from "../pages/results/resultsPage";
+import fetchData from "../pages/results/functions/fetchData";
 
 const getContactForm = () => {
     const currentStep = Number(localStorage.getItem('step'));
@@ -52,7 +52,7 @@ const getContactForm = () => {
             const values = [name.value, number.value, email.value];
             const allInputsFilled = values.every(value => value.length > 0);
             if (allInputsFilled) {
-                handleSendButton(event, name.value);
+                handleSendButton(event);
             }
         }
     );
@@ -64,53 +64,9 @@ const getContactForm = () => {
 const handleSendButton = (event) => {
     event.preventDefault();
     recordAnswersToLS();
-    const requestBody = getRequestBody();
-    const headers = new Headers();
-    headers.append('accept', '*/*');
-    headers.append('Content-Type', 'application/json');
-
-    fetch('http://eco-silicon-387419.uc.r.appspot.com/surveys', {
-        method: 'POST',
-        body: JSON.stringify(requestBody),
-        headers: headers
-    })
-        .then(response => {
-            return response.json();
-        }).then(data => {
-        const body = document.querySelector('body');
-        clearElement(body);
-        body.append(resultsPage(data));
-        resetForm();
-    })
-        .catch(error => {
-            console.log(error + 'it`s error!');
-        });
+    fetchData();
 }
 
-const getRequestBody = () => {
-    const body = {
-        "initiator": "",
-        "cities": [],
-        "currentEducation": "",
-        "educationTargetType": "",
-        "learningForm": "",
-        "paidEducationAllowedType": "",
-        "educationSpecialityType": [],
-        "howManyToAdmission": "",
-        "name": "",
-        "phone": "",
-        "email": ""
-    }
-
-    let mapFromLS = getMapFromLS('responses');
-    const answers = Array.from(mapFromLS.values());
-    answers.forEach(answer => {
-        if (Object.prototype.hasOwnProperty.call(body, answer.question)) {
-            body[answer.question] = answer.value;
-        }
-    });
-    return body;
-}
 
 const recordAnswersToLS = () => {
     const inputs = document.querySelectorAll('input');
@@ -124,8 +80,7 @@ const recordAnswersToLS = () => {
     }
 }
 
-
-const resetForm = () => {
+export const resetForm = () => {
     localStorage.setItem('step', '1');
     localStorage.setItem('responses', '[]');
     const form = document.querySelector('form');
