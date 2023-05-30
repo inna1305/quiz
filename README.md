@@ -8,6 +8,8 @@ This project is a small Single-Page Application (SPA) that implements a user dat
 - Form pages can be navigated forward and backward.
 - Entered values are automatically saved and restored using Local Storage.
 
+In addition to the above features, the application incorporates a feature that allows the user to submit the entered data and retrieve the results from a server. Upon submission, the application sends a request to the server, which processes the data and returns the corresponding results. This integration with a server allows the application to provide dynamic functionality and deliver personalized outcomes based on the user's input.
+
 ## Technologies Used
 
 The project is built using the following technologies:
@@ -16,6 +18,7 @@ The project is built using the following technologies:
 - Sass: A CSS preprocessor used to write modular and maintainable styles.
 - Native JavaScript: The core programming language used to implement the form's functionality.
 - Local Storage: A web browser API used to store and retrieve data locally on the user's device.
+- Server-Side Integration: The application incorporates server-side functionality to handle form submission, process the data, and deliver the corresponding results to the user.
 
 ## Deploy
 https://inna1305.github.io/quiz/
