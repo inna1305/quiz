@@ -10,7 +10,7 @@ const fetchData = () => {
     headers.append('Content-Type', 'application/json');
     const requestBody = getRequestBody();
 
-    fetch('http://eco-silicon-387419.uc.r.appspot.com/surveys', {
+    fetch('https://eco-silicon-387419.uc.r.appspot.com/surveys', {
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: headers
