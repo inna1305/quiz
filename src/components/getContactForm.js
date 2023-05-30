@@ -4,6 +4,7 @@ import {getMapFromLS} from "../helpers/getMapFromLS";
 import clearElement from "../helpers/clearElement";
 import getQuestionElem from "./getQuestionElem";
 import fetchData from "../pages/results/functions/fetchData";
+import getPreloader from "./preloader/getPreloader";
 
 const getContactForm = () => {
     const currentStep = Number(localStorage.getItem('step'));
@@ -52,7 +53,10 @@ const getContactForm = () => {
             const values = [name.value, number.value, email.value];
             const allInputsFilled = values.every(value => value.length > 0);
             if (allInputsFilled) {
-                handleSendButton(event);
+                event.preventDefault();
+                recordAnswersToLS();
+                showLoader();
+                setTimeout(fetchData, 1000);
             }
         }
     );
@@ -61,12 +65,11 @@ const getContactForm = () => {
     return container;
 }
 
-const handleSendButton = (event) => {
-    event.preventDefault();
-    recordAnswersToLS();
-    fetchData();
+const showLoader = () => {
+    const body = document.querySelector('body');
+    clearElement(body);
+    body.append(getPreloader());
 }
-
 
 const recordAnswersToLS = () => {
     const inputs = document.querySelectorAll('input');
