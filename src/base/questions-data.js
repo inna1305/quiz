@@ -1,50 +1,66 @@
+const initiatorMap = new Map([['YOURSELF', 'Себе'], ['SPOUSE', 'Супругу/супруге'], ['RELATIVE', 'Родственнику'], ['COLLEAGUE', 'Коллеге'], ['CHILD', 'Ребенку'], ['OTHER', 'Другое']]);
+const citiesMap = new Map([['Санкт-Петербург', 'Санкт-Петербург'], ['Москва', 'Москва'], ['Нижний Новгород', 'Нижний Новгород'], ['Ростов-на-Дону', 'Ростов-на-Дону']]);
+const currentEducationMap = new Map([['GRADE_9', '9 классов'], ['GRADE_11', '11 классов'], ['TECHNICAL_SCHOOL', 'Училище'], ['TECHNICAL_COLLEGE', 'Колледж/техникум'], ['UNCOMPLETED_UNIVERSITY', 'Неоконченное высшее'], ['UNIVERSITY', 'Высшее']]);
+const educationTargetTypeMap = new Map([['UNIVERSITY', 'Вуз'], ['TECHNICAL_COLLEGE', 'Колледж/техникум'], ['TECHNICAL_SCHOOL', 'Училище']]);
+const learningFormMap = new Map([['FULL_TIME', 'Очную'], ['EXTRAMURAL', 'Заочную'], ['DISTANCE', 'Дистанционную']]);
+const paidEducationAllowedTypeMap = new Map([['BUDGET_ONLY', 'Нет, только бюджет'], ['PAID_EDUCATION', 'Да, планирую учиться платно'], ['ANY', 'Возможны оба варианта']]);
+const howManyToAdmissionMap = new Map([['ASAP', 'Как можно быстрее'], ['MONTH', 'Месяц'], ['QUARTER', 'Квартал'], ['SIX_MONTHS', 'Полгода'], ['YEAR', 'Год']]);
+const educationSpecialityTypeMap = new Map([['ECONOMICS', 'Экономика'], ['PHILOSOPHY', 'Философия'], ['SOCIOLOGY', 'Социология'], ['LAW', 'Юриспруденция']]);
 export const questionsData = [
     {
         question: 'Для кого вы ищете учебное заведение?',
+        name: 'initiator',
         answerType: 'radio',
-        variants: [ 'Себе', 'Супругу/супруге', 'Родственнику', 'Коллеге', 'Ребенку', 'Другое'],
+        variants: initiatorMap,
         id: 1,
     },
     {
         question: 'В каком городе планируете поступать?',
+        name: 'cities',
         answerType: 'select',
-        variants: [ 'Санкт-Петербург', 'Москва', 'Новосибирск', 'Нижний новгород', 'Ростов-на-Дону', 'Казань', 'Челябинск', 'Омск', 'Краснодар', 'Уфа', 'Пермь', 'Другой' ],
+        variants: citiesMap,
         id: 2,
     },
     {
         question: 'Какое образование уже есть?',
+        name: 'currentEducation',
         answerType: 'radio',
-        variants: [ '9 классов', '11 классов', 'Училище', 'Колледж/техникум', 'Неоконченное высшее', 'Высшее' ],
+        variants: currentEducationMap,
         id: 3,
     },
     {
         question: 'Куда планируете поступать?',
+        name: 'educationTargetType',
         answerType: 'radio',
-        variants: [ 'Вуз', 'Колледж/техникум', 'Училище' ],
+        variants: educationTargetTypeMap,
         id: 4,
     },
     {
         question: 'Какую форму обучения предпочитаете?',
+        name: 'learningForm',
         answerType: 'radio',
-        variants: [ 'Очную', 'Заочную', 'Дистанционную' ],
+        variants: learningFormMap,
         id: 5,
     },
     {
         question: 'Рассматриваете платное обучение?',
+        name: 'paidEducationAllowedType',
         answerType: 'radio',
-        variants: [ 'Нет, только бюджет', 'Да, планирую учиться платно', 'Возможны оба варианта' ],
+        variants: paidEducationAllowedTypeMap,
         id: 6,
     },
     {
         question: 'Какая специальность интересует?',
+        name: 'educationSpecialityType',
         answerType: 'select',
-        variants: [ 'Экономика', 'Философия', 'Социология', 'Юриспруденция' ],
+        variants: educationSpecialityTypeMap,
         id: 7,
     },
     {
         question: 'Как скоро планируете поступать?',
+        name: 'howManyToAdmission',
         answerType: 'radio',
-        variants: [ 'Как можно быстрее', 'Месяц', 'Квартал', 'Полгода', 'Год' ],
+        variants: howManyToAdmissionMap,
         id: 8,
     },
 ];

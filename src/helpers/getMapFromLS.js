@@ -1,6 +1,5 @@
 export function getMapFromLS(name) {
     const mapJson = localStorage.getItem(name);
-    // let map = new Map();
     if (mapJson === null) {
         return new Map();
     }

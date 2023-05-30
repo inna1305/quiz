@@ -11,7 +11,7 @@ const getQuestionElem = (questionObj) => {
     const container = createElement('div', {class: 'form__container'});
     const titleCounterContainer = createElement('div', {class: 'form__title-counter-container'});
     const title = createElement('h2', {class: 'form__title'}, questionObj.question);
-    const counter = createElement('div', {class: 'form__counter'}, `Шаг ${currentStep}/${questionsData.length}`);
+    const counter = createElement('div', {class: 'form__counter'}, `Шаг ${currentStep}/${questionsData.length+1}`);
     titleCounterContainer.append(title, counter);
     const inputSet = createElement('div', {class: 'form__question'});
     if (questionObj.answerType === 'radio') {

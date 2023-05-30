@@ -11,14 +11,18 @@ const getSelectSet = (questionObj) => {
     }
 
     const select = createElement('select', {multiple: '', name: 'options', id: 'options', class: 'select'});
+    const variants = Array.from(questionObj.variants.keys());
 
-    questionObj.variants.forEach(elem => {
+    variants.forEach(elem => {
+
+        //console.log(questionObj.variants.get());
         const option = createElement('option', {
+            id: questionObj.id,
             class: 'fieldset__option',
             value: elem,
             name: 'variant',
             required: ''
-        }, elem);
+        }, questionObj.variants.get(elem));
 
         if (setOfSelected && setOfSelected.has(elem)) {
             option.selected = true;
@@ -42,7 +46,7 @@ export const handleSelectAnswers = (questionObj) => {
         }
     });
     if (selected.length > 0) {
-        const data = {question: questionObj.question, value: selected, id: questionObj.id};
+        const data = {question: questionObj.name, value: selected, id: questionObj.id};
         let mapFromLS = getMapFromLS('responses');
         mapFromLS.set(questionObj.id, data);
         localStorage.setItem('responses', JSON.stringify(Array.from(mapFromLS.entries())));
