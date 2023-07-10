@@ -10,7 +10,8 @@ const fetchData = () => {
     headers.append('Content-Type', 'application/json');
     const requestBody = getRequestBody();
 
-    fetch('https://eco-silicon-387419.uc.r.appspot.com/surveys', {
+    fetch('https://gothic-calling-389914.uc.r.appspot.com/surveys', {
+        //https://gothic-calling-389914.uc.r.appspot.com/swagger-ui/index.html
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: headers
